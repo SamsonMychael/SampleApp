@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="http://xamarin.com/schemas/2020/toolkit" xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="SampleApp.PatientPage">
+
+
+    <Grid BackgroundColor="#F3F5F9" RowSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+       
+        <CollectionView   Margin="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                        SelectionMode="None" ItemsSource="{Binding MyMedical}">
+            <CollectionView.Header>
+                <Label Text="List Of Patients" TextColor="Black" FontSize="18"/>
+            </CollectionView.Header>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <pv:PancakeView  BackgroundColor="White" 
+                                     VerticalOptions="StartAndExpand" 
+                                    HorizontalOptions="FillAndExpand">
+                        <Grid VerticalOptions="StartAndExpand"
+                              HorizontalOptions="FillAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <BoxView BackgroundColor="{Binding Color}" 
+                                     WidthRequest="3"
+                                     HorizontalOptions="Start"
+                                     VerticalOptions="FillAndExpand"/>
+                            <behaviors:Expander Grid.Column="1">
+                                <behaviors:Expander.Header>
+                                    <Grid HorizontalOptions="FillAndExpand">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="3.5*"/>
+                                        </Grid.ColumnDefinitions>
+                                       
+                                        <BoxView Grid.Column="1" BackgroundColor="#F2F4F8"
+                                                 WidthRequest="1" HorizontalOptions="Start" 
+                                                 VerticalOptions="FillAndExpand"/>
+                                        <StackLayout Grid.Column="2"
+                                                     HorizontalOptions="Start" 
+                                                     VerticalOptions="Center" 
+                                                     Margin="20">
+                                            <Label Text="{Binding Name}" 
+                                                   TextColor="Black" 
+                                                   FontSize="15"/>
+                                           
+                                        </StackLayout>
+                                    </Grid>
+                                    </behaviors:Expander.Header>
+                                        <Grid HorizontalOptions="FillAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="3.5*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <BoxView Grid.Column="1" BackgroundColor="#F2F4F8" WidthRequest="1" HorizontalOptions="Start" 
+                                             VerticalOptions="FillAndExpand"/>
+                                    <StackLayout Grid.Column="2" Spacing="10">
+                                        <Label Text="Patient Details"  TextColor="Black" Opacity="0.7" FontSize="10" Margin="20,0"/>
+                                        <StackLayout BindableLayout.ItemsSource="{Binding Patientdetails}" HorizontalOptions="Start" VerticalOptions="Center" Margin="20,0,0,20">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label TextColor="#2F3246" FontSize="12">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <FormattedString.Spans>
+                                                                    <Span Text="{Binding Time}"/>
+                                                                    <Span Text=" - "/>
+                                                                    <Span Text="{Binding WardNo}" FontAttributes="Bold"/>
+                                                                </FormattedString.Spans>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Grid>
+                            </behaviors:Expander>
+                        </Grid>
+                    </pv:PancakeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
